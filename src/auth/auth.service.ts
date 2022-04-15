@@ -31,11 +31,11 @@ import {
   
     async signInWithGoogle(data) {
       if (!data.user) throw new BadRequestException();
-      if (data.user){
-        console.log(`LOOK HERE - ${data.user}`);
-        console.log(`LOOK HERE - ${data.user.email}`);
-        console.log(JSON.stringify(data.user));
-      }
+      // if (data.user){
+      //   console.log(`LOOK HERE - ${data.user}`);
+      //   console.log(`LOOK HERE - ${data.user.email}`);
+      //   console.log(JSON.stringify(data.user));
+      // }
       let user = (
         await this.userService.getByEmail(data.user.email)
       );

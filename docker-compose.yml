@@ -1,0 +1,17 @@
+version: '3.3'
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DATABASE}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    container_name: postgres-db
+    ports:
+      - '5433:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data
+volumes:
+  db:
+    driver: local

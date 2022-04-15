@@ -14,8 +14,8 @@ export class User extends BaseEntity {
   @Column({type: 'varchar', length: 300, unique: true})
   email: string;
 
-  @Column({type: 'varchar', length: 300, nullable: true})
-  role: string;
+  @Column({type: 'varchar', length: 300, default: true})
+  role: string = 'user';
 
   @OneToMany(() => Point, (point: Point) => point.user)
   points: Point[];
