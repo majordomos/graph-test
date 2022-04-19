@@ -13,8 +13,16 @@ import {
       private userService: UserService,
       private jwtService: JwtService
     ) {}
+
+    async validateUser(username: string, password: string): Promise<User | null> {
+      console.log(`LOOK HERE1 - ${{username}}`);
+      const user = (await this.userService.getByEmail(username));
+      if (user && user.password === password) return user;
+      return null;
+  }
   
     async login(user: User) {
+      console.log(`LOOK HERE2 - ${user.email}`);
       return {
         access_token: this.jwtService.sign(
           {
@@ -31,11 +39,11 @@ import {
   
     async signInWithGoogle(data) {
       if (!data.user) throw new BadRequestException();
-      // if (data.user){
-      //   console.log(`LOOK HERE - ${data.user}`);
-      //   console.log(`LOOK HERE - ${data.user.email}`);
-      //   console.log(JSON.stringify(data.user));
-      // }
+      if (data.user){
+        console.log(`LOOK HERE3 - ${data.user}`);
+        console.log(`LOOK HERE4 - ${data.user.email}`);
+        console.log(JSON.stringify(data.user));
+      }
       let user = (
         await this.userService.getByEmail(data.user.email)
       );

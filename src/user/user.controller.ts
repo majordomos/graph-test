@@ -11,25 +11,25 @@ export class UserController {
     return await this.serv.getAll();
   }
 
-  // @Get(':id')
-  // public async getById(@Param('id') id: string){
-  //   return await this.serv.getById(Number(id));
-  // }
-
-  @Post()
-  public async create(@Body() user: User){
-    return await this.serv.create(user);
+  @Get(':id')
+  public async getById(@Param('id') id: string){
+    return await this.serv.getById(Number(id));
   }
+
+  // @Post()
+  // public async create(@Body() user: User){
+  //   return await this.serv.create(user);
+  // }
 
   @Put(':id')
   public async update(@Param('id') id: string, @Body() user: User){
     return await this.serv.updateById(Number(id), user);
   }
 
-  @Delete(':id')
-  public async delete(@Param('id') id: string){
-    return await this.serv.deleteById(Number(id));
-  }
+  // @Delete(':id')
+  // public async delete(@Param('id') id: string){
+  //   return await this.serv.deleteById(Number(id));
+  // }
 
   @Get('gmail/:email')
   public async getByEmail(@Param('email') email: string){
