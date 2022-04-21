@@ -45,7 +45,6 @@ export class AuthService {
     if(!email || !firstName) {
       throw new BadRequestException('Email and first name are required.')
     }
-
     const allowedDomain = process.env.ALLOWED_GOOGLE_DOMAIN;
     if(hostDomain !== allowedDomain){
       throw new BadRequestException(`Sign in is allowed only for the @${allowedDomain} domain.`)
