@@ -20,14 +20,4 @@ export class PointController {
   public async create(@Body() point: Point){
     return await this.pointService.create(point);
   }
-
-  // @Put(':id')
-  // public async update(@Param('id') id: string, @Body() point: Point){
-  //   return await this.serv.updateById(Number(id), point);
-  // }
-
-  // @Delete(':id')
-  // public async delete(@Param('id') id: string){
-  //   return await this.serv.deleteById(Number(id));
-  // }
 }

@@ -16,20 +16,10 @@ export class UserController {
     return await this.userService.getById(id);
   }
 
-  // @Post()
-  // public async create(@Body() user: User){
-  //   return await this.serv.create(user);
-  // }
-
   @Put(':id')
   public async update(@Param('id') id: string, @Body() user: User){
     return await this.userService.updateById(id, user);
   }
-
-  // @Delete(':id')
-  // public async delete(@Param('id') id: string){
-  //   return await this.serv.deleteById(Number(id));
-  // }
 
   @Get('gmail/:email')
   public async getByEmail(@Param('email') email: string){
