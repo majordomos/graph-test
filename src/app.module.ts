@@ -6,16 +6,17 @@ import { configService } from './config/config.service';
 import { PointModule } from './point/point.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
-import { GoogleAuthService } from './google-auth/google-auth.service';
+import { GoogleAuthModule } from './google-auth/google-auth.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(configService.getTypeOrmConfig()),
     PointModule,
     UserModule,
-    AuthModule
+    AuthModule,
+    GoogleAuthModule
   ],
   controllers: [AppController],
-  providers: [AppService, GoogleAuthService],
+  providers: [AppService],
 })
 export class AppModule {}

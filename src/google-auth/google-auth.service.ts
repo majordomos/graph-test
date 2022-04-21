@@ -8,7 +8,6 @@ export class GoogleAuthService implements IGoogleAuthService {
     async verifyJwt(googleToken: string): Promise<TokenPayload>{
         const googleClientId = process.env.GOOGLE_CLIENT_ID;
         const googleClient = new OAuth2Client(googleClientId);
-
         let ticket: LoginTicket;
         try{
             ticket = await googleClient.verifyIdToken({
@@ -16,11 +15,8 @@ export class GoogleAuthService implements IGoogleAuthService {
                 audience: googleClientId,
             })
         } catch(error) {
-            console.log(`${
-                {message: `googleClient.verifyIdToken() error`,
-                error: error.stack,
-            }
-            }`);
+            console.log(`Invalid verity method - ${ticket}`);
+            console.log(`Error - ${error}`);
         }
         const tokenPayload = ticket.getPayload();
 
