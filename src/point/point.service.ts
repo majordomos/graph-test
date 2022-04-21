@@ -1,30 +1,30 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Point } from '../model/point.entity';
+import { Point } from './point.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
 export class PointService {
-  constructor(@InjectRepository(Point) private readonly repo: Repository<Point>) { }
+  constructor(@InjectRepository(Point) private readonly pointRepository: Repository<Point>) { }
 
   public async getAll() {
-    return await this.repo.find();
+    return await this.pointRepository.find();
   }
 
   public async getById(id: number){
-    return await this.repo.findOne(id);
+    return await this.pointRepository.findOne(id);
   }
 
   public async create(point: Point){
-    return await this.repo.save(point);
+    return await this.pointRepository.save(point);
   }
 
   public async updateById(id: number, point: Point){
-    return await this.repo.update(id, point);
+    return await this.pointRepository.update(id, point);
   }
 
   public async deleteById(id: number){
-    return await this.repo.delete(id);
+    return await this.pointRepository.delete(id);
   }
 
 }

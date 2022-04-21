@@ -1,9 +1,11 @@
-import { Entity, Column, ManyToOne, CreateDateColumn } from 'typeorm';
-import { BaseEntity } from './base.entity';
-import { User } from './user.entity';
+import { Entity, Column, ManyToOne, CreateDateColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from '../user/user.entity';
 
-@Entity({ name: 'point' })
-export class Point extends BaseEntity {
+@Entity({ name: 'points' })
+export class Point{
+
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({type: 'integer'})
   x_value: number;

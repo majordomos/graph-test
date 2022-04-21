@@ -6,6 +6,7 @@ import { configService } from './config/config.service';
 import { PointModule } from './point/point.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { GoogleAuthService } from './google-auth/google-auth.service';
 
 @Module({
   imports: [
@@ -15,6 +16,6 @@ import { AuthModule } from './auth/auth.module';
     AuthModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, GoogleAuthService],
 })
 export class AppModule {}

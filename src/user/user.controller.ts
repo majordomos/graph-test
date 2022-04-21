@@ -1,19 +1,19 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { User } from '../model/user.entity';
+import { User } from './user.entity';
 import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
-  constructor(private serv: UserService) { }
+  constructor(private userService: UserService) { }
 
   @Get()
   public async getAll() {
-    return await this.serv.getAll();
+    return await this.userService.getAll();
   }
 
   @Get(':id')
   public async getById(@Param('id') id: string){
-    return await this.serv.getById(Number(id));
+    return await this.userService.getById(id);
   }
 
   // @Post()
@@ -23,7 +23,7 @@ export class UserController {
 
   @Put(':id')
   public async update(@Param('id') id: string, @Body() user: User){
-    return await this.serv.updateById(Number(id), user);
+    return await this.userService.updateById(id, user);
   }
 
   // @Delete(':id')
@@ -33,6 +33,6 @@ export class UserController {
 
   @Get('gmail/:email')
   public async getByEmail(@Param('email') email: string){
-    return await this.serv.getByEmail(email);
+    return await this.userService.getByEmail(email);
   }
 }

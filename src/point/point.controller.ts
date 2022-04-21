@@ -1,24 +1,24 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { Point } from '../model/point.entity';
+import { Point } from './point.entity';
 import { PointService } from './point.service';
 
 @Controller('point')
 export class PointController {
-  constructor(private serv: PointService) { }
+  constructor(private pointService: PointService) { }
 
   @Get()
   public async getAll() {
-    return await this.serv.getAll();
+    return await this.pointService.getAll();
   }
 
   @Get(':id')
   public async getById(@Param('id') id: string){
-    return await this.serv.getById(Number(id));
+    return await this.pointService.getById(Number(id));
   }
 
   @Post()
   public async create(@Body() point: Point){
-    return await this.serv.create(point);
+    return await this.pointService.create(point);
   }
 
   // @Put(':id')
