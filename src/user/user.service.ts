@@ -7,7 +7,6 @@ import { CreateUserDto } from 'src/dto/create-user-dto';
 @Injectable()
 export class UserService {
   constructor(@InjectRepository(User) private readonly userRepository: Repository<User>) { 
-    // super(userRepository, { useSoftDelete:true });
   }
 
   public async getAll() {
