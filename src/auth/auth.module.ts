@@ -6,11 +6,12 @@ import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
 // import { GoogleStrategy } from './strategies/google-strategy';
 import { UserModule } from '../user/user.module';
+import { GoogleAuthService } from '../google-auth/google-auth.service';
 // import { JwtStrategy } from './strategies/jwt-strategy';
 
 @Module({
   imports: [UserModule, /*PassportModule,*/ JwtModule.register({})],
   controllers: [AuthController],
-  providers: [AuthService,/* LocalStrategy, JwtStrategy, GoogleStrategy*/]
+  providers: [AuthService,GoogleAuthService/* LocalStrategy, JwtStrategy, GoogleStrategy*/]
 })
 export class AuthModule { }

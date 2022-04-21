@@ -3,12 +3,13 @@ import {
     BadRequestException,
     ForbiddenException,
   } from "@nestjs/common";
+  import jwt, { Secret, JwtPayload } from 'jsonwebtoken';
   import { UserService } from "../user/user.service";
   import { User } from "../user/user.entity";
   import { JwtService } from "@nestjs/jwt";
   import { iAuthPayload, ISignInResponse } from "./auth.service.interface";
-  import { GoogleAuthService } from "src/google-auth/google-auth.service";
-  import jwt, { Secret, JwtPayload } from 'jsonwebtoken';
+  import { GoogleAuthService } from "../google-auth/google-auth.service";
+
   
   @Injectable()
   export class AuthService {
@@ -17,7 +18,6 @@ import {
       private jwtService: JwtService,
       private googleService: GoogleAuthService,
     ) {}
-
   //   async validateUser(username: string, password: string): Promise<User | null> {
   //     console.log(`LOOK HERE1 - ${{username}}`);
   //     const user = (await this.userService.getByEmail(username));
@@ -73,6 +73,7 @@ import {
 
     async signIn(authPayload: iAuthPayload): Promise<ISignInResponse>{
       const { googleToken } = authPayload;
+
       if (!googleToken){
         throw new BadRequestException('googleToken is required.');
       }
@@ -107,32 +108,32 @@ import {
       try{
         user = await this.userService.getByEmail(email);
       } catch(error) {
-        if (!user){
-          user = await this.userService.create({
-            googleId,
-            firstName,
-            lastName,
-            email,
-            pictureUrl
-          });
-        }else {
-          throw error;
-        }
+        console.log(error);
+      };
+      if (!user){
+        user = await this.userService.create({
+          googleId,
+          firstName,
+          lastName,
+          email,
+          pictureUrl
+        });
       }
-      const accessToken = this.signJWT(JSON.stringify(user));
+      const accessToken = this.signJWT(user);
+      console.log(accessToken)
       return {
         user,
         token: accessToken,
       };
     }
-
     signJWT(payload: unknown): string {
-      const jwtSecret = process.env.JWT_SECRET as Secret;
-      return jwt.sign(
+      const jwtSecret = process.env.JWT_SECRET;
+      return this.jwtService.sign(
         {
           payload,
-        },
-        jwtSecret,
+        },{
+          secret: jwtSecret
+        }
       );
     }
 
