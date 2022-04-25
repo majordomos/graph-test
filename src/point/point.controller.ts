@@ -7,17 +7,17 @@ export class PointController {
   constructor(private pointService: PointService) { }
 
   @Get()
-  public async getAll() {
+  public async getAll(): Promise<Point[]> {
     return await this.pointService.getAll();
   }
 
   @Get(':id')
-  public async getById(@Param('id') id: string){
+  public async getById(@Param('id') id: string): Promise<Point>{
     return await this.pointService.getById(Number(id));
   }
 
   @Post()
-  public async create(@Body() point: Point){
+  public async create(@Body() point: Point): Promise<Point>{
     return await this.pointService.create(point);
   }
 }

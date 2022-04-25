@@ -9,26 +9,26 @@ export class User{
   id: string;
 
   @Column({type: 'varchar', length: 300})
-  googleId: string;
+  google_id: string;
 
   @Column({type: 'varchar', length: 300})
-  firstName: string;
+  first_name: string;
 
   @Column({type: 'varchar', length: 300})
-  lastName: string;
+  last_name: string;
 
   @Column({type: 'varchar', length: 300, unique: true})
   email: string;
 
   @Column({type: 'varchar', length: 300})
-  pictureUrl: string;
+  picture_url: string;
 
-  @Column({type: 'varchar', length: 300, default: true})
-  user_role: string = 'employee';
+  @Column({type: 'varchar', length: 300, default: 'employee'})
+  user_role: string;
 
   @OneToMany(() => Point, (point: Point) => point.user)
   points: Point[];
 
   @DeleteDateColumn({type: 'timestamptz'})
-  deletedAt?: Date;
+  deleted_at?: Date;
 }
