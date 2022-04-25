@@ -9,27 +9,31 @@ export class UserService {
   constructor(@InjectRepository(User) private readonly userRepository: Repository<User>) { 
   }
 
-  public async getAll() {
+  async getAll(): Promise<User[]>{
     return await this.userRepository.find();
   }
 
-  public async getById(id: string){
+  async getById(id: string): Promise<User>{
     return await this.userRepository.findOne(id);
   }
 
-  public async create(createUserDto: CreateUserDto){
+  async create(createUserDto: CreateUserDto): Promise<User>{
     return await this.userRepository.save(createUserDto);
   }
 
-  public async updateById(id: string, User: User){
+  //  async create(user: User){
+  //   return await this.userRepository.save(user);
+  // }
+
+  async updateById(id: string, User: User){
     return await this.userRepository.update(id, User);
   }
 
-  public async deleteById(id: string){
-    return await this.userRepository.delete(id);
-  }
+  //  async deleteById(id: string){
+  //   return await this.userRepository.delete(id);
+  // }
 
-  public async getByEmail(email: string){
+  async getByEmail(email: string): Promise<User>{
     return await this.userRepository.findOne({email});
   }
 

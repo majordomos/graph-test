@@ -7,24 +7,24 @@ import { Repository } from 'typeorm';
 export class PointService {
   constructor(@InjectRepository(Point) private readonly pointRepository: Repository<Point>) { }
 
-  public async getAll() {
+  async getAll(): Promise<Point[]> {
     return await this.pointRepository.find();
   }
 
-  public async getById(id: number){
+  async getById(id: number): Promise<Point>{
     return await this.pointRepository.findOne(id);
   }
 
-  public async create(point: Point){
+  async create(point: Point): Promise<Point>{
     return await this.pointRepository.save(point);
   }
 
-  public async updateById(id: number, point: Point){
-    return await this.pointRepository.update(id, point);
-  }
+  // async updateById(id: number, point: Point): Promise<Point>{
+  //   return await this.pointRepository.update(id, point);
+  // }
 
-  public async deleteById(id: number){
-    return await this.pointRepository.delete(id);
-  }
+  // async deleteById(id: number){
+  //   return await this.pointRepository.delete(id);
+  // }
 
 }
